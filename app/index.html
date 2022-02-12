@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <title>gleb_petrovich ⁄</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/main.css?7">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+        <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+        <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+        <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+
+        <meta name="description" content="Сайт-визитка gleb_petrovich. Здесь находится все мои проекты и контакты по которым можно со мною связаться">
+        <meta name="author" content="Gleb">
+        <meta name="keywords" content="PHP,glebpetrovich,программирование">
+    </head>
+    <body>
+        <header style="
+                width: 100vw;
+                margin: 20px auto;
+                text-align: center;
+            ">
+            <div>
+                <span class="mdc-top-app-bar__title"><b>gleb_petrovich ⁄</b></span>
+                <a class="mdc-top-app-bar__title header-link" href="#coming soon"><b>meigostudios ⁄</b></a>
+            </div>
+
+            <div style="margin: 10px 25px">
+                <button class="mdc-button" onclick="openLink('https://github.com/glebpetr')">
+                    <span class="mdc-button__ripple"></span>
+                    <span class="material-icons iconify"
+                          data-icon="mdi-github" aria-hidden="true"></span>
+                    <span class="mdc-button__label subheader-text" style="padding-left: 10px">GitHub</span>
+                </button>
+                <button class="mdc-button"
+                        style="color: #2787F5"
+                        onclick="openLink('https://vk.me/lari_gleb')">
+                    <span class="mdc-button__ripple"></span>
+                    <span class="material-icons iconify"
+                          data-icon="simple-icons:vk" aria-hidden="true"></span>
+                    <span class="mdc-button__label subheader-text" style="padding-left: 10px">VK</span>
+                </button>
+
+                <!--<button class="mdc-button"
+                        style="color: #0088cc;"
+                        onclick="openLink('https://t.me/')">
+                    <span class="mdc-button__ripple"></span>
+                    <span class="material-icons iconify"
+                          data-icon="mdi-telegram" aria-hidden="true"></span>
+                    <span class="mdc-button__label subheader-text" style="padding-left: 10px">Telegram</span>
+                </button>-->
+                <button class="mdc-button"
+                        style="color: #5865F2;"
+                        onclick="openLink('https://discord.com/users/716031777319420047')">
+                    <span class="mdc-button__ripple"></span>
+                    <span class="material-icons iconify"
+                          data-icon="simple-icons:discord" aria-hidden="true"></span>
+                    <span class="mdc-button__label subheader-text" style="padding-left: 10px">Discord</span>
+                </button>
+            </div>
+        </header>
+
+        <div id="projects"
+                style="
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    grid-column-gap: 10px;
+                    grid-row-gap: 10px;
+                ">
+
+        </div>
+
+        <script>
+            window.onload = () => fetch("https://public-api.meigo.fun/v1/shop/applications.json")
+                .then(r => r.json())
+                .then(onLoad)
+
+            function openLink(url) {
+                window.open(url, '_blank').focus();
+            }
+
+            function onLoad(projects) {
+                const projectsContainer = document.getElementById("projects")
+
+                projects.forEach(it => {
+                    projectsContainer.innerHTML += `
+                    <div class="mdc-card" style="padding-top: 15px" onclick="openLink('`+it.link+`')">
+                        <div class="card-body mdc-typography--body2">
+                            `+it.name+`
+                        </div>
+
+                        <div class="card-body mdc-typography--caption">
+                            `+it.description+`
+                        </div>
+                    </div>`
+                })
+            }
+        </script>
+    </body>
+</html>
